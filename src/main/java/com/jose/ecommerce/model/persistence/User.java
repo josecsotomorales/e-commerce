@@ -30,6 +30,10 @@ public class User {
 	@Column(nullable = false, unique = true)
 	@JsonProperty
 	private String username;
+
+	@Column(nullable = false)
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	private String password;
 	
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cart_id", referencedColumnName = "id")
