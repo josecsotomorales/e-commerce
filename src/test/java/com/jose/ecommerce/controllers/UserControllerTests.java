@@ -1,13 +1,11 @@
 package com.jose.ecommerce.controllers;
 
-import com.jose.ecommerce.controllers.UserController;
 import com.jose.ecommerce.model.persistence.User;
 import com.jose.ecommerce.model.persistence.repositories.CartRepository;
 import com.jose.ecommerce.model.persistence.repositories.UserRepository;
 import com.jose.ecommerce.model.requests.CreateUserRequest;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
