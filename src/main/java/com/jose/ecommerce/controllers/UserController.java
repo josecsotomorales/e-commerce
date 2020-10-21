@@ -23,13 +23,19 @@ import com.jose.ecommerce.model.requests.CreateUserRequest;
 public class UserController {
 	
 	@Autowired
-	private UserRepository userRepository;
+	private final UserRepository userRepository;
 	
 	@Autowired
-	private CartRepository cartRepository;
+	private final CartRepository cartRepository;
 
 	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+	public UserController(UserRepository userRepository, CartRepository cartRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+		this.userRepository = userRepository;
+		this.cartRepository = cartRepository;
+		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+	}
 
 	@GetMapping("/id/{id}")
 	public ResponseEntity<User> findById(@PathVariable Long id) {
@@ -49,7 +55,7 @@ public class UserController {
 		Cart cart = new Cart();
 		cartRepository.save(cart);
 		user.setCart(cart);
-		if(createUserRequest.getPassword().length() < 8 ||
+		if(createUserRequest.getPassword().length() < 6 ||
 				!createUserRequest.getPassword().equals(createUserRequest.getConfirmPassword())) {
 			log.error("Error with user password. Cannot create user {}", createUserRequest.getUsername());
 			return ResponseEntity.badRequest().build();
