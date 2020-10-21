@@ -1,4 +1,4 @@
-package com.jose.ecommerce;
+package com.jose.ecommerce.controllers;
 
 import com.jose.ecommerce.controllers.UserController;
 import com.jose.ecommerce.model.persistence.User;
@@ -18,7 +18,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class ControllerTests {
+public class UserControllerTests {
 
     private UserController userController;
     private UserRepository userRepository = mock(UserRepository.class);
