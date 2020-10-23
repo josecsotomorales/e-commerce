@@ -19,17 +19,13 @@ import static org.mockito.Mockito.when;
 public class UserControllerTests {
 
     private UserController userController;
-    private UserRepository userRepository = mock(UserRepository.class);
-    private CartRepository cartRepository = mock(CartRepository.class);
-    private BCryptPasswordEncoder bCryptPasswordEncoder = mock(BCryptPasswordEncoder.class);
+    private final UserRepository userRepository = mock(UserRepository.class);
+    private final CartRepository cartRepository = mock(CartRepository.class);
+    private final BCryptPasswordEncoder bCryptPasswordEncoder = mock(BCryptPasswordEncoder.class);
 
     @Before
     public void init() {
-        userController = new UserController(
-                userRepository,
-                cartRepository,
-                bCryptPasswordEncoder
-        );
+        userController = new UserController(userRepository, cartRepository, bCryptPasswordEncoder);
     }
 
     @Test
@@ -67,7 +63,7 @@ public class UserControllerTests {
     @Test
     public void findUserById() {
 
-        Long userId = 1L;
+        long userId = 1L;
         String username = "josesoto";
         User user = new User();
         user.setId(userId);
@@ -85,7 +81,7 @@ public class UserControllerTests {
     @Test
     public void findUserbyUsername() {
 
-        Long userId = 1L;
+        long userId = 1L;
         String username = "josesoto";
         User user = new User();
         user.setId(userId);

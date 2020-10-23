@@ -17,8 +17,12 @@ import com.jose.ecommerce.model.persistence.repositories.ItemRepository;
 public class ItemController {
 
 	@Autowired
-	private ItemRepository itemRepository;
-	
+	private final ItemRepository itemRepository;
+
+	public ItemController(ItemRepository itemRepository) {
+		this.itemRepository = itemRepository;
+	}
+
 	@GetMapping
 	public ResponseEntity<List<Item>> getItems() {
 		return ResponseEntity.ok(itemRepository.findAll());

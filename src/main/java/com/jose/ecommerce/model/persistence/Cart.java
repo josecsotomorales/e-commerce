@@ -21,7 +21,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "cart")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class Cart {
 	

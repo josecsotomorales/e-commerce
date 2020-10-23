@@ -24,7 +24,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "user_order")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class UserOrder {
 
