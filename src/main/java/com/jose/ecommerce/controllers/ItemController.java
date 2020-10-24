@@ -3,6 +3,7 @@ package com.jose.ecommerce.controllers;
 import java.util.List;
 
 import com.jose.ecommerce.model.persistence.Item;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import com.jose.ecommerce.model.persistence.repositories.ItemRepository;
 
 @RestController
 @RequestMapping("/api/item")
+@Slf4j
 public class ItemController {
 
 	@Autowired
@@ -30,15 +32,20 @@ public class ItemController {
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Item> getItemById(@PathVariable Long id) {
+		log.info("Find User By Id: {}", id);
 		return ResponseEntity.of(itemRepository.findById(id));
 	}
 	
 	@GetMapping("/name/{name}")
 	public ResponseEntity<List<Item>> getItemsByName(@PathVariable String name) {
 		List<Item> items = itemRepository.findByName(name);
-		return items == null || items.isEmpty() ? ResponseEntity.notFound().build()
-				: ResponseEntity.ok(items);
-			
+		if(items == null || items.isEmpty()) {
+			log.info("No Items Found");
+			return ResponseEntity.notFound().build();
+		} else {
+			log.info("Found Items: {}", items);
+			return ResponseEntity.ok(items);
+		}
 	}
 	
 }

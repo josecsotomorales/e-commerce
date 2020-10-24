@@ -6,6 +6,7 @@ import com.jose.ecommerce.model.persistence.User;
 import com.jose.ecommerce.model.persistence.UserOrder;
 import com.jose.ecommerce.model.persistence.repositories.OrderRepository;
 import com.jose.ecommerce.model.persistence.repositories.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/order")
+@Slf4j
 public class OrderController {
 	
 	
@@ -38,6 +40,7 @@ public class OrderController {
 		}
 		UserOrder order = UserOrder.createFromCart(user.getCart());
 		orderRepository.save(order);
+		log.info("User Submitted Order: {}", username);
 		return ResponseEntity.ok(order);
 	}
 	
@@ -45,8 +48,10 @@ public class OrderController {
 	public ResponseEntity<List<UserOrder>> getOrdersForUser(@PathVariable String username) {
 		User user = userRepository.findByUsername(username);
 		if(user == null) {
+			log.info("No Orders Found");
 			return ResponseEntity.notFound().build();
 		}
+		log.info("Found User: {}", user.getUsername());
 		return ResponseEntity.ok(orderRepository.findByUser(user));
 	}
 }

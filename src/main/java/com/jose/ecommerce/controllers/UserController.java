@@ -39,13 +39,20 @@ public class UserController {
 
 	@GetMapping("/id/{id}")
 	public ResponseEntity<User> findById(@PathVariable Long id) {
+		log.info("Find User By Id: {}", id);
 		return ResponseEntity.of(userRepository.findById(id));
 	}
 	
 	@GetMapping("/{username}")
 	public ResponseEntity<User> findByUserName(@PathVariable String username) {
 		User user = userRepository.findByUsername(username);
-		return user == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(user);
+		if(user == null) {
+			log.info("User Not Found");
+			return ResponseEntity.notFound().build();
+		} else {
+			log.info("User Found: {}", user.getUsername());
+			return ResponseEntity.ok(user);
+		}
 	}
 	
 	@PostMapping("/create")
@@ -62,6 +69,7 @@ public class UserController {
 		}
 		user.setPassword(bCryptPasswordEncoder.encode(createUserRequest.getPassword()));
 		userRepository.save(user);
+		log.info("Created User: {}",user.getUsername());
 		return ResponseEntity.ok(user);
 	}
 	
