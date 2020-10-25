@@ -1,9 +1,13 @@
 pipeline {
     agent any
+    environment {
+        JAVA_HOME = "/Library/Java/JavaVirtualMachines/jdk-14.jdk/Contents/Home"
+    }
 
     stages {
         stage('Build') {
             steps {
+                java --version
                 sh 'mvn -B -DskipTests clean package'
             }
         }
