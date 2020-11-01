@@ -5,6 +5,29 @@
 target
 /target/
 
+#Editor
+out
+bin
+.settings
+.classpath
+.project
+.vscode
+
+# Gradle Cache directory
+.gradle
+
+# Build Directories
+build/
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+# Cache of project
+.gradletasknamecache
+
 # MacOS files
 .DS_Store
 
